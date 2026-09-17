@@ -10,5 +10,5 @@ export const messages = {
 8. Trier les apprenants par progression décroissante
 9. Trier les apprenants par ordre alphabétique
 0. Quitter
-Votre choix : `,
+`,
 };
