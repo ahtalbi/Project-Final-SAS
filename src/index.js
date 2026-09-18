@@ -1,19 +1,19 @@
 import promptSync from 'prompt-sync';
 import { messages } from './data/messages.js';
 import { validateChoice } from './helpers/validators.js';
-import { ajouterApprenant } from './students.js';
+import { ajouterApprenant, enregistrerResultat } from './students.js';
 import { students } from './data/data.js';
 
 // Constants
-const prompt = promptSync();
+const prompt = promptSync({ sigint: true });
 
 while (true) {
     console.log(messages.welcomeMessage);
     let input = prompt("Votre choix : ");
-    
+
     // check the input if its valid or no
     while (!validateChoice(input)) {
-        input = prompt("invalid choice your choice need to be 0 => votre choix <= 9: ");
+        input = prompt("invalid choice your choice need to be 0 <= votre choix <= 9: ");
     }
     
     input = Number(input.trim());
@@ -35,6 +35,7 @@ while (true) {
             break;
         case 5:
             // 5. Ajouter ou modifier le résultat d'une journée
+            enregistrerResultat();
             break;
         case 6:
             // 6. Rechercher un apprenant par nom

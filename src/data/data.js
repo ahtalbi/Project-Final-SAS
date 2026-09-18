@@ -24,10 +24,16 @@ export const students = [
                 totalExercices: 20, challengeTermine: false
             }
         ]
+    },
+    {
+        id: 3,
+        nomComplet: "Ahmed",
+        ville: "Oujda",
+        resultats: []
     }
 ];
 
-let id = (students.length > 0) ? students[students.length - 1].id : -1;
+let id = (students.length > 0) ? students[students.length - 1].id : 0;
 
 export function getNextId() {
     return ++id;

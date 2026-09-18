@@ -4,7 +4,7 @@ export function validateChoice(str) {
     return /^[0-9]$/.test(str);
 }
 
-export function validateName(nomComplet) {
+export function normaliserNom(nomComplet) {
     if (typeof nomComplet !== "string") return null;
     nomComplet = nomComplet.trim();
     if (nomComplet.length <= 0 ||  nomComplet.length > 50) return null;
@@ -22,4 +22,11 @@ export function validateVille(ville) {
                 .filter(word => word !== "")
                 .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
                 .join(" ");
+}
+
+export function validateId(id) {
+    if (typeof id !== "string") return null;
+    id = id.trim();
+    if (!/^[0-9]+$/.test(id)) return null;
+    return Number(id);
 }
