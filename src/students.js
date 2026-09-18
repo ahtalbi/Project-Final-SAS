@@ -88,7 +88,7 @@ function ajouterApprenant() {
 function rechercherApprenantId() {
     let id = validateId(prompt("Identifiant de l'apprenant : "));
     if (id === null) {
-        console.log("Invalid Id");
+        console.log("Identifiant invalide.");
         return;
     }
     
@@ -209,7 +209,7 @@ function trierParOrdreAphabetique() {
 function enregistrerResultat() {
     let id = validateId(prompt("Identifiant de l'apprenant : "));
     if (id === null) {
-        console.log("Invalid Id");
+        console.log("Identifiant invalide.");
         return;
     }
 
@@ -223,49 +223,49 @@ function enregistrerResultat() {
 
     let jour = prompt("Jour (1 à 7) : ");
     if (typeof jour !== "string") {
-        console.log("Jour invalid.");
+        console.log("Jour invalide.");
         return;
     }
 
     jour = Number(jour.trim());
     if (isNaN(jour) || jour < 1 || jour > 7) {
-        console.log("Jour invalid.");
+        console.log("Jour invalide.");
         return;
     }
 
     let totalExercices = prompt("Total d'exercices proposés : ");
     if (typeof totalExercices !== "string") {
-        console.log("Le Nomere total des exercise invalid.");
+        console.log("Le nombre total d'exercices est invalide.");
         return;
     }
     
     totalExercices = Number(totalExercices.trim());
     if (totalExercices < 0) {
-        console.log("Le Nomere total des exercise invalid.");
+        console.log("Le nombre total d'exercices est invalide.");
         return;
     }
     
     let exercicesTermines = prompt("Exercices terminés : ");
     if (typeof exercicesTermines !== "string") {
-        console.log("Les exercises tremines invalid.");
+        console.log("Le nombre d'exercices terminés est invalide.");
         return;
     }
     
     exercicesTermines = Number(exercicesTermines.trim());
     if (exercicesTermines < 0 || exercicesTermines > totalExercices) {
-        console.log("Les exercises tremines > totalExersices.");
+        console.log("Le nombre d'exercices terminés ne peut pas dépasser le nombre d'exercices proposés.");
         return;
     }
 
     let challengeTermine = prompt("L'etudiant finir le challenge (oui ou non): ");
     if (typeof challengeTermine !== "string") {
-        console.log("le challenge input et oui ou non.");
+        console.log("La réponse doit être oui ou non.");
         return;
     }
 
     challengeTermine = challengeTermine.trim().toLowerCase();
     if (challengeTermine !== "oui" && challengeTermine !== "non") {
-        console.log("le challenge input et oui ou non.");
+        console.log("La réponse doit être oui ou non.");
         return;
     }
 

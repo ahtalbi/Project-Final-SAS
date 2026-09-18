@@ -12,7 +12,7 @@ while (true) {
 
     // check the input if its valid or no
     while (!validateChoice(input)) {
-        input = prompt("invalid choice your choice need to be 0 <= votre choix <= 9: ");
+        input = prompt("Choix invalide. Votre choix doit être compris entre 0 et 9 : ");
     }
     
     input = Number(input.trim());
@@ -57,7 +57,7 @@ while (true) {
             break;
         default:
             // 0. Quitter
-            console.log();
+            console.log("Fermeture de l'application. À bientôt !");
             process.exit();
     }
 }
