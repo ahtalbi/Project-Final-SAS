@@ -1,4 +1,4 @@
-export const apprenants = [
+export const students = [
     {
         id: 1,
         nomComplet: "Sara Dev",
@@ -25,4 +25,10 @@ export const apprenants = [
             }
         ]
     }
-]
+];
+
+let id = (students.length > 0) ? students[students.length - 1].id : -1;
+
+export function getNextId() {
+    return ++id;
+}
