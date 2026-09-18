@@ -1,8 +1,7 @@
 import promptSync from 'prompt-sync';
 import { messages } from './data/messages.js';
 import { validateChoice } from './helpers/validators.js';
-import { ajouterApprenant, enregistrerResultat } from './students.js';
-import { students } from './data/data.js';
+import { ajouterApprenant, enregistrerResultat, filtrerParNiveau, rechercherApprenantId, rechercherApprenantNom, trierParOrdreAphabetique, trierParProgressionDecroissante } from './students.js';
 
 // Constants
 const prompt = promptSync({ sigint: true });
@@ -22,9 +21,11 @@ while (true) {
     switch (input) {
         case 1:
             // 1. Afficher le tableau de bord
+
             break;
         case 2:
             // 2. Afficher la liste des apprenants
+            
             break;
         case 3:
             // 3. Ajouter un apprenant
@@ -32,6 +33,7 @@ while (true) {
             break;
         case 4:
             // 4. Consulter un apprenant par identifiant
+            rechercherApprenantId();
             break;
         case 5:
             // 5. Ajouter ou modifier le résultat d'une journée
@@ -39,20 +41,23 @@ while (true) {
             break;
         case 6:
             // 6. Rechercher un apprenant par nom
+            rechercherApprenantNom();
             break;
         case 7:
             // 7. Filtrer les apprenants par niveau
+            filtrerParNiveau();
             break;
         case 8:
             // 8. Trier les apprenants par progression décroissante
+            trierParProgressionDecroissante();
             break;
         case 9:
             // 9. Trier les apprenants par ordre alphabétique
+            trierParOrdreAphabetique();
             break;
         default:
             // 0. Quitter
+            console.log();
             process.exit();
     }
-
-    console.log(students);  
 }

@@ -7,7 +7,7 @@ export function validateChoice(str) {
 export function normaliserNom(nomComplet) {
     if (typeof nomComplet !== "string") return null;
     nomComplet = nomComplet.trim();
-    if (nomComplet.length <= 0 ||  nomComplet.length > 50) return null;
+    if (nomComplet.length === 0 || nomComplet.length > 50) return null;
     return nomComplet.split(" ")
                      .filter(word => word !== "")
                      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
@@ -17,7 +17,7 @@ export function normaliserNom(nomComplet) {
 export function validateVille(ville) {
     if (typeof ville !== "string") return null;
     ville = ville.trim();
-    if (ville.length <= 0 || ville.length > 195) return null;
+    if (ville.length === 0 || ville.length > 195) return null;
     return ville.split(" ")
                 .filter(word => word !== "")
                 .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
