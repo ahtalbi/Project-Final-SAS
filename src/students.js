@@ -296,5 +296,6 @@ export {
     filtrerParNiveau,
     trierParOrdreAphabetique,
     trierParProgressionDecroissante,
-    enregistrerResultat
+    enregistrerResultat,
+    calculerProgression
 };
