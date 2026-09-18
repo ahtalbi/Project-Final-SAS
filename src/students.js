@@ -7,7 +7,7 @@ const prompt = promptSync();
 
 function afficherLeTableau() {
     if (students.length === 0) {
-        console.log("Aucun apprenant enregistré.");
+        console.log("\x1b[33mAucun apprenant enregistré.\x1b[0m");
         return;
     }
 
@@ -30,34 +30,34 @@ function afficherLeTableau() {
 
     let moyenne = (progressionTotale / students.length).toFixed(2);
 
-    console.log("\n=== TABLEAU DE BORD ===");
-    console.log(`Total apprenants : ${students.length}`);
-    console.log(`Progression moyenne du groupe : ${moyenne}%`);
-    console.log(`Solide : ${solide} | En progression : ${enProgression} | À renforcer : ${aRenforcer}`);
-    console.log("\n--- Classement par progression ---");
+    console.log("\n\x1b[1m\x1b[36m=== TABLEAU DE BORD ===\x1b[0m");
+    console.log(`\x1b[1mTotal apprenants :\x1b[0m \x1b[33m${students.length}\x1b[0m`);
+    console.log(`\x1b[1mProgression moyenne du groupe :\x1b[0m \x1b[32m${moyenne}%\x1b[0m`);
+    console.log(`\x1b[32mSolide : ${solide}\x1b[0m | \x1b[33mEn progression : ${enProgression}\x1b[0m | \x1b[31mÀ renforcer : ${aRenforcer}\x1b[0m`);
+    console.log("\n\x1b[1m\x1b[34m--- Classement par progression ---\x1b[0m");
 
     for (let student of students) {
         let [totalExercicesSum, exercicesTerminesSum, progression] = calculerProgression(student);
         let joursManquants = [1, 2, 3, 4, 5, 6, 7].filter(j => !student.resultats.map(r => r.jour).includes(j));
         let challengesManquants = student.resultats.filter(r => !r.challengeTermine).map(r => r.jour);
 
-        console.log(`\n${student.nomComplet} (id ${student.id}) : ${progression}% (${exercicesTerminesSum}/${totalExercicesSum})`);
-        console.log(`  Journées non renseignées : ${joursManquants.length ? joursManquants.join(", ") : "aucune"}`);
-        console.log(`  Challenges non terminés : ${challengesManquants.length ? challengesManquants.join(", ") : "aucune"}`);
+        console.log(`\n\x1b[1m${student.nomComplet}\x1b[0m \x1b[2m(id ${student.id})\x1b[0m : \x1b[32m${progression}%\x1b[0m \x1b[2m(${exercicesTerminesSum}/${totalExercicesSum})\x1b[0m`);
+        console.log(`  \x1b[33mJournées non renseignées :\x1b[0m ${joursManquants.length ? joursManquants.join(", ") : "aucune"}`);
+        console.log(`  \x1b[35mChallenges non terminés :\x1b[0m ${challengesManquants.length ? challengesManquants.join(", ") : "aucun"}`);
     }
     console.log("\n");
 }
 
 function afficherLaListeDesApprenants() {
     if (students.length === 0) {
-        console.log("Aucun apprenant enregistré.");
+        console.log("\x1b[33mAucun apprenant enregistré.\x1b[0m");
         return;
     }
 
     console.log("\n");
     for (let student of students) {
         let [, , progression] = calculerProgression(student);
-        console.log(`id ${student.id} : ${student.nomComplet} (${student.ville}) - ${student.resultats.length} journée(s) renseignée(s) - ${progression}%`);
+        console.log(`\x1b[1mid ${student.id}\x1b[0m : \x1b[36m${student.nomComplet}\x1b[0m \x1b[2m(${student.ville})\x1b[0m - \x1b[33m${student.resultats.length} journée(s) renseignée(s)\x1b[0m - \x1b[32m${progression}%\x1b[0m`);
     }
     console.log("\n");
 }
@@ -65,13 +65,13 @@ function afficherLaListeDesApprenants() {
 function ajouterApprenant() {
     let nomComplet = normaliserNom(prompt("Entrez le nom complet : "));
     if (nomComplet === null) {
-        console.log("Nom invalide : Lettres (A-Z) uniquement, 1 à 50 caractères.");
+        console.log("\x1b[31mNom invalide : Lettres (A-Z) uniquement, 1 à 50 caractères.\x1b[0m");
         return;
     }
 
     let ville = validateVille(prompt("Entrez la ville : "));
     if (ville === null) {
-        console.log("Ville invalide : Lettres (A-Z) uniquement, 1 à 195 caractères.");
+        console.log("\x1b[31mVille invalide : Lettres (A-Z) uniquement, 1 à 195 caractères.\x1b[0m");
         return;        
     }
 
@@ -82,50 +82,50 @@ function ajouterApprenant() {
         resultats: []
     });
 
-    console.log("Utilisateur ajouté avec succès !");
+    console.log("\x1b[32m✔ Utilisateur ajouté avec succès !\x1b[0m");
 }
 
 function rechercherApprenantId() {
     let id = validateId(prompt("Identifiant de l'apprenant : "));
     if (id === null) {
-        console.log("Identifiant invalide.");
+        console.log("\x1b[31mIdentifiant invalide.\x1b[0m");
         return;
     }
     
     let student = students.find(s => s.id === id);
     if (!student) {
-        console.log("Apprenant introuvable.");
+        console.log("\x1b[33mApprenant introuvable.\x1b[0m");
         return;
     }
     
     let [totalExercicesSum, exercicesTerminesSum, progression] = calculerProgression(student);
-    console.log("============================================================");
-    console.log(`Apprenant : ${student.nomComplet} (id ${student.id})`);
-    console.log(`Exercices : ${exercicesTerminesSum} / ${totalExercicesSum}`);
-    console.log(`Progression : ${progression}%`);
-    console.log("============================================================");
+    console.log("\x1b[36m============================================================\x1b[0m");
+    console.log(`\x1b[1mApprenant :\x1b[0m \x1b[32m${student.nomComplet}\x1b[0m \x1b[2m(id ${student.id})\x1b[0m`);
+    console.log(`\x1b[1mExercices :\x1b[0m \x1b[33m${exercicesTerminesSum} / ${totalExercicesSum}\x1b[0m`);
+    console.log(`\x1b[1mProgression :\x1b[0m \x1b[36m${progression}%\x1b[0m`);
+    console.log("\x1b[36m============================================================\x1b[0m");
 }
 
 function rechercherApprenantNom() {
     let nom = prompt("Entrez le nom complet : ");
     if (typeof nom !== "string" || nom.length === 0 || nom.length > 50) {
-        console.log("Nom invalide : Lettres (A-Z) uniquement, 1 à 50 caractères.");
+        console.log("\x1b[31mNom invalide : Lettres (A-Z) uniquement, 1 à 50 caractères.\x1b[0m");
         return;
     }
 
-    let matches = students.filter(s => s.nomComplet.toLowerCase().includes(nom));
+    let matches = students.filter(s => s.nomComplet.toLowerCase().includes(nom.toLowerCase().trim()));
     if (matches.length === 0) {
-        console.log("Aucun apprenant trouvé.");
+        console.log("\x1b[33mAucun apprenant trouvé.\x1b[0m");
         return;
     }
 
     for (let student of matches) {
         let [totalExercicesSum, exercicesTerminesSum, progression] = calculerProgression(student);
-        console.log("============================================================");
-        console.log(`Apprenant : ${student.nomComplet} (id ${student.id})`);
-        console.log(`Exercices : ${exercicesTerminesSum} / ${totalExercicesSum}`);
-        console.log(`Progression : ${progression}%`);
-        console.log("============================================================");
+        console.log("\x1b[36m============================================================\x1b[0m");
+        console.log(`\x1b[1mApprenant :\x1b[0m \x1b[32m${student.nomComplet}\x1b[0m \x1b[2m(id ${student.id})\x1b[0m`);
+        console.log(`\x1b[1mExercices :\x1b[0m \x1b[33m${exercicesTerminesSum} / ${totalExercicesSum}\x1b[0m`);
+        console.log(`\x1b[1mProgression :\x1b[0m \x1b[36m${progression}%\x1b[0m`);
+        console.log("\x1b[36m============================================================\x1b[0m");
     }
 }
 
@@ -142,37 +142,38 @@ function filtrerParNiveau() {
     if (niveau === null) return;
     niveau = niveau.trim().toLowerCase();
 
-    let niveaux = ["solide", "en progression", "a renforcer"];
+    let niveaux = ["solide", "en progression", "a renforcer", "à renforcer"];
     if (!niveaux.includes(niveau)) {
-        console.log("Niveau invalide.");
+        console.log("\x1b[31mNiveau invalide.\x1b[0m");
         return;
     }
 
+    let niveauCle = niveau.replace("à", "a");
     let studendsFiltered = students.filter(s => {
         let [, , progression] = calculerProgression(s);
-        if (niveau === "solide") return progression >= 80;
-        if (niveau === "en progression") return progression >= 50 && progression < 80;
+        if (niveauCle === "solide") return progression >= 80;
+        if (niveauCle === "en progression") return progression >= 50 && progression < 80;
         return progression < 50;
     });
 
     if (studendsFiltered.length === 0) {
-        console.log("Aucun apprenant dans ce niveau.");
+        console.log("\x1b[33mAucun apprenant dans ce niveau.\x1b[0m");
         return;
     }
 
     console.log("\n");
     for (let student of studendsFiltered) {
-        console.log("================================================================")
+        console.log("\x1b[36m================================================================\x1b[0m");
         let [totalExercicesSum, exercicesTerminesSum, progression] = calculerProgression(student);
-        console.log(`${student.nomComplet} : ${progression}%`);
-        console.log("================================================================")
+        console.log(`\x1b[1m${student.nomComplet}\x1b[0m : \x1b[32m${progression}%\x1b[0m`);
+        console.log("\x1b[36m================================================================\x1b[0m");
     }
     console.log("\n");
 }
 
 function trierParProgressionDecroissante() {
     if (students.length === 0) {
-        console.log("Aucun apprenant enregistré.");
+        console.log("\x1b[33mAucun apprenant enregistré.\x1b[0m");
         return;
     }
 
@@ -185,14 +186,14 @@ function trierParProgressionDecroissante() {
     console.log("\n");
     for (let student of students) {
         let [totalExercicesSum, exercicesTerminesSum, progression] = calculerProgression(student);
-        console.log(`${student.nomComplet} : ${progression}%`);
+        console.log(`\x1b[1m${student.nomComplet}\x1b[0m : \x1b[32m${progression}%\x1b[0m`);
     }
     console.log("\n");
 }
 
 function trierParOrdreAphabetique() {
     if (students.length === 0) {
-        console.log("Aucun apprenant enregistré.");
+        console.log("\x1b[33mAucun apprenant enregistré.\x1b[0m");
         return;
     }
 
@@ -201,7 +202,7 @@ function trierParOrdreAphabetique() {
     console.log("\n");
     for (let student of students) {
         let [totalExercicesSum, exercicesTerminesSum, progression] = calculerProgression(student);
-        console.log(`${student.nomComplet} : ${progression}%`);
+        console.log(`\x1b[1m${student.nomComplet}\x1b[0m : \x1b[32m${progression}%\x1b[0m`);
     }
     console.log("\n");
 }
@@ -209,63 +210,63 @@ function trierParOrdreAphabetique() {
 function enregistrerResultat() {
     let id = validateId(prompt("Identifiant de l'apprenant : "));
     if (id === null) {
-        console.log("Identifiant invalide.");
+        console.log("\x1b[31mIdentifiant invalide.\x1b[0m");
         return;
     }
 
     let student = students.find(s => s.id === id);
     if (!student) {
-        console.log("Apprenant introuvable.");
+        console.log("\x1b[33mApprenant introuvable.\x1b[0m");
         return;
     }
 
-    console.log(`Apprenant trouvé : ${student.nomComplet}`);
+    console.log(`\x1b[32mApprenant trouvé : ${student.nomComplet}\x1b[0m`);
 
     let jour = prompt("Jour (1 à 7) : ");
     if (typeof jour !== "string") {
-        console.log("Jour invalide.");
+        console.log("\x1b[31mJour invalide.\x1b[0m");
         return;
     }
 
     jour = Number(jour.trim());
     if (isNaN(jour) || jour < 1 || jour > 7) {
-        console.log("Jour invalide.");
+        console.log("\x1b[31mJour invalide.\x1b[0m");
         return;
     }
 
     let totalExercices = prompt("Total d'exercices proposés : ");
     if (typeof totalExercices !== "string") {
-        console.log("Le nombre total d'exercices est invalide.");
+        console.log("\x1b[31mLe nombre total d'exercices est invalide.\x1b[0m");
         return;
     }
     
     totalExercices = Number(totalExercices.trim());
     if (totalExercices < 0) {
-        console.log("Le nombre total d'exercices est invalide.");
+        console.log("\x1b[31mLe nombre total d'exercices est invalide.\x1b[0m");
         return;
     }
     
     let exercicesTermines = prompt("Exercices terminés : ");
     if (typeof exercicesTermines !== "string") {
-        console.log("Le nombre d'exercices terminés est invalide.");
+        console.log("\x1b[31mLe nombre d'exercices terminés est invalide.\x1b[0m");
         return;
     }
     
     exercicesTermines = Number(exercicesTermines.trim());
     if (exercicesTermines < 0 || exercicesTermines > totalExercices) {
-        console.log("Le nombre d'exercices terminés ne peut pas dépasser le nombre d'exercices proposés.");
+        console.log("\x1b[31mLe nombre d'exercices terminés ne peut pas dépasser le nombre d'exercices proposés.\x1b[0m");
         return;
     }
 
     let challengeTermine = prompt("L'etudiant finir le challenge (oui ou non): ");
     if (typeof challengeTermine !== "string") {
-        console.log("La réponse doit être oui ou non.");
+        console.log("\x1b[31mLa réponse doit être oui ou non.\x1b[0m");
         return;
     }
 
     challengeTermine = challengeTermine.trim().toLowerCase();
     if (challengeTermine !== "oui" && challengeTermine !== "non") {
-        console.log("La réponse doit être oui ou non.");
+        console.log("\x1b[31mLa réponse doit être oui ou non.\x1b[0m");
         return;
     }
 
@@ -282,9 +283,9 @@ function enregistrerResultat() {
 
     let [totalExercicesSum, exercicesTerminesSum, progression] = calculerProgression(student);
 
-    console.log(`Résultat du jour ${jour} enregistré.`);
-    console.log(`${student.nomComplet} : ${exercicesTerminesSum} / ${totalExercicesSum} exercices, progression ${progression} %.`);
-    console.log(`${student.resultats.length} journées renseignées, ${student.resultats.filter(r => r.challengeTermine).length} challenges terminés.`);
+    console.log(`\x1b[32m✔ Résultat du jour ${jour} enregistré.\x1b[0m`);
+    console.log(`\x1b[1m${student.nomComplet}\x1b[0m : \x1b[33m${exercicesTerminesSum} / ${totalExercicesSum}\x1b[0m exercices, progression \x1b[32m${progression} %\x1b[0m.`);
+    console.log(`\x1b[36m${student.resultats.length}\x1b[0m journées renseignées, \x1b[35m${student.resultats.filter(r => r.challengeTermine).length}\x1b[0m challenges terminés.`);
 }
 
 export {

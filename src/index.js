@@ -5,12 +5,12 @@ import { afficherLaListeDesApprenants, afficherLeTableau, ajouterApprenant, enre
 
 // Constants
 const prompt = promptSync({ sigint: true });
+console.log(messages.menuMessage);
 
 while (true) {
-    console.log(messages.welcomeMessage);
+    console.log(messages.menuMessage);
     let input = prompt("Votre choix : ");
 
-    // check the input if its valid or no
     while (!validateChoice(input)) {
         input = prompt("Choix invalide. Votre choix doit être compris entre 0 et 9 : ");
     }
@@ -57,7 +57,7 @@ while (true) {
             break;
         default:
             // 0. Quitter
-            console.log("Fermeture de l'application. À bientôt !");
+            console.log("\n\x1b[1m\x1b[32mFermeture de l'application. À bientôt !\x1b[0m\n");
             process.exit();
     }
 }

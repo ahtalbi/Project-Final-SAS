@@ -1,14 +1,16 @@
 export const messages = {
-    welcomeMessage : `SAS PROGRESS CONSOLE
-1. Afficher le tableau de bord
-2. Afficher la liste des apprenants
-3. Ajouter un apprenant
-4. Consulter un apprenant par identifiant
-5. Ajouter ou modifier le résultat d'une journée
-6. Rechercher un apprenant par nom
-7. Filtrer les apprenants par niveau
-8. Trier les apprenants par progression décroissante
-9. Trier les apprenants par ordre alphabétique
-0. Quitter
-`,
+    menuMessage : `\x1b[1m\x1b[36m====================================================\x1b[0m
+\x1b[1m\x1b[34m               SAS PROGRESS CONSOLE                 \x1b[0m
+\x1b[1m\x1b[36m====================================================\x1b[0m
+ \x1b[33m1.\x1b[0m Afficher le tableau de bord
+ \x1b[33m2.\x1b[0m Afficher la liste des apprenants
+ \x1b[33m3.\x1b[0m Ajouter un apprenant
+ \x1b[33m4.\x1b[0m Consulter un apprenant par identifiant
+ \x1b[33m5.\x1b[0m Ajouter ou modifier le résultat d'une journée
+ \x1b[33m6.\x1b[0m Rechercher un apprenant par nom
+ \x1b[33m7.\x1b[0m Filtrer les apprenants par niveau
+ \x1b[33m8.\x1b[0m Trier les apprenants par progression décroissante
+ \x1b[33m9.\x1b[0m Trier les apprenants par ordre alphabétique
+ \x1b[31m0.\x1b[0m Quitter
+\x1b[1m\x1b[36m----------------------------------------------------\x1b[0m`,
 };
