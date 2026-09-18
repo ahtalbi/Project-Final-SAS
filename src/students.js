@@ -183,10 +183,11 @@ function trierParProgressionDecroissante() {
         return progB - progA;
     });
 
-    console.log("\n");
-    for (let student of students) {
+    console.log("\n\x1b[1m\x1b[34m--- Classement par progression décroissante ---\x1b[0m\n");
+    for (let i = 0; i < students.length; i++) {
+        let student = students[i];
         let [totalExercicesSum, exercicesTerminesSum, progression] = calculerProgression(student);
-        console.log(`\x1b[1m${student.nomComplet}\x1b[0m : \x1b[32m${progression}%\x1b[0m`);
+        console.log(`  \x1b[33m${i + 1}.\x1b[0m \x1b[1m${student.nomComplet}\x1b[0m \x1b[2m(id ${student.id} - ${student.ville})\x1b[0m : \x1b[32m${progression}%\x1b[0m \x1b[2m(${exercicesTerminesSum}/${totalExercicesSum} exercices)\x1b[0m`);
     }
     console.log("\n");
 }
@@ -199,10 +200,10 @@ function trierParOrdreAphabetique() {
 
     students.sort((a, b) => a.nomComplet.localeCompare(b.nomComplet));
 
-    console.log("\n");
+    console.log("\n\x1b[1m\x1b[36m--- Liste des apprenants par ordre alphabétique ---\x1b[0m\n");
     for (let student of students) {
         let [totalExercicesSum, exercicesTerminesSum, progression] = calculerProgression(student);
-        console.log(`\x1b[1m${student.nomComplet}\x1b[0m : \x1b[32m${progression}%\x1b[0m`);
+        console.log(`  • \x1b[1m${student.nomComplet}\x1b[0m \x1b[2m(${student.ville} - id ${student.id})\x1b[0m : \x1b[32m${progression}%\x1b[0m \x1b[2m(${exercicesTerminesSum}/${totalExercicesSum} exercices)\x1b[0m`);
     }
     console.log("\n");
 }
