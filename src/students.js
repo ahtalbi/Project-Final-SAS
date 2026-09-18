@@ -5,6 +5,63 @@ import { normaliserNom, validateId, validateVille } from './helpers/validators.j
 // Constants
 const prompt = promptSync();
 
+function afficherLeTableau() {
+    if (students.length === 0) {
+        console.log("Aucun apprenant enregistré.");
+        return;
+    }
+
+    let solide = 0, enProgression = 0, aRenforcer = 0;
+    let progressionTotale = 0;
+
+    students.sort((a, b) => {
+        let [, , progA] = calculerProgression(a);
+        let [, , progB] = calculerProgression(b);
+        return progB - progA;
+    });
+
+    for (let student of students) {
+        let [, , progression] = calculerProgression(student);
+        progressionTotale += progression;
+        if (progression >= 80) solide++;
+        else if (progression >= 50) enProgression++;
+        else aRenforcer++;
+    }
+
+    let moyenne = (progressionTotale / students.length).toFixed(2);
+
+    console.log("\n=== TABLEAU DE BORD ===");
+    console.log(`Total apprenants : ${students.length}`);
+    console.log(`Progression moyenne du groupe : ${moyenne}%`);
+    console.log(`Solide : ${solide} | En progression : ${enProgression} | À renforcer : ${aRenforcer}`);
+    console.log("\n--- Classement par progression ---");
+
+    for (let student of students) {
+        let [totalExercicesSum, exercicesTerminesSum, progression] = calculerProgression(student);
+        let joursManquants = [1, 2, 3, 4, 5, 6, 7].filter(j => !student.resultats.map(r => r.jour).includes(j));
+        let challengesManquants = student.resultats.filter(r => !r.challengeTermine).map(r => r.jour);
+
+        console.log(`\n${student.nomComplet} (id ${student.id}) : ${progression}% (${exercicesTerminesSum}/${totalExercicesSum})`);
+        console.log(`  Journées non renseignées : ${joursManquants.length ? joursManquants.join(", ") : "aucune"}`);
+        console.log(`  Challenges non terminés : ${challengesManquants.length ? challengesManquants.join(", ") : "aucune"}`);
+    }
+    console.log("\n");
+}
+
+function afficherLaListeDesApprenants() {
+    if (students.length === 0) {
+        console.log("Aucun apprenant enregistré.");
+        return;
+    }
+
+    console.log("\n");
+    for (let student of students) {
+        let [, , progression] = calculerProgression(student);
+        console.log(`id ${student.id} : ${student.nomComplet} (${student.ville}) - ${student.resultats.length} journée(s) renseignée(s) - ${progression}%`);
+    }
+    console.log("\n");
+}
+
 function ajouterApprenant() {
     let nomComplet = normaliserNom(prompt("Entrez le nom complet : "));
     if (nomComplet === null) {
@@ -231,6 +288,8 @@ function enregistrerResultat() {
 }
 
 export {
+    afficherLeTableau,
+    afficherLaListeDesApprenants,
     ajouterApprenant,
     rechercherApprenantId,
     rechercherApprenantNom,
