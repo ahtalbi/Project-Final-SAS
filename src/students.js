@@ -85,6 +85,18 @@ function ajouterApprenant() {
     console.log("\x1b[32m✔ Utilisateur ajouté avec succès !\x1b[0m");
 }
 
+function filtrerParVille() {
+    let res = {};
+    for (let student of students) {
+        if (res[student.ville]) {
+            res[student.ville].push(student);
+        } else {
+            res[student.ville] = [student];
+        }
+    }
+    console.log(res);
+}
+
 function rechercherApprenantId() {
     let id = validateId(prompt("Identifiant de l'apprenant : "));
     if (id === null) {
@@ -139,7 +151,7 @@ function calculerProgression(student) {
 
 function filtrerParNiveau() {
     let niveau = prompt("Niveau (Solide / En progression / A renforcer) : ");
-    if (niveau === null) return;
+    if (typeof niveau !== "string") return;
     niveau = niveau.trim().toLowerCase();
 
     let niveaux = ["solide", "en progression", "a renforcer", "à renforcer"];
@@ -242,7 +254,7 @@ function enregistrerResultat() {
     }
     
     totalExercices = Number(totalExercices.trim());
-    if (totalExercices < 0) {
+    if (isNaN(totalExercices) || totalExercices < 0) {
         console.log("\x1b[31mLe nombre total d'exercices est invalide.\x1b[0m");
         return;
     }
@@ -254,7 +266,7 @@ function enregistrerResultat() {
     }
     
     exercicesTermines = Number(exercicesTermines.trim());
-    if (exercicesTermines < 0 || exercicesTermines > totalExercices) {
+    if (isNaN(exercicesTermines) || exercicesTermines < 0 || exercicesTermines > totalExercices) {
         console.log("\x1b[31mLe nombre d'exercices terminés ne peut pas dépasser le nombre d'exercices proposés.\x1b[0m");
         return;
     }
@@ -290,6 +302,7 @@ function enregistrerResultat() {
 }
 
 export {
+    filtrerParVille,
     afficherLeTableau,
     afficherLaListeDesApprenants,
     ajouterApprenant,

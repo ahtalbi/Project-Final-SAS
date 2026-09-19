@@ -1,7 +1,7 @@
 import promptSync from 'prompt-sync';
 import { messages } from './data/messages.js';
 import { validateChoice } from './helpers/validators.js';
-import { afficherLaListeDesApprenants, afficherLeTableau, ajouterApprenant, enregistrerResultat, filtrerParNiveau, rechercherApprenantId, rechercherApprenantNom, trierParOrdreAphabetique, trierParProgressionDecroissante } from './students.js';
+import { afficherLaListeDesApprenants, afficherLeTableau, ajouterApprenant, enregistrerResultat, filtrerParNiveau, filtrerParVille, rechercherApprenantId, rechercherApprenantNom, trierParOrdreAphabetique, trierParProgressionDecroissante } from './students.js';
 
 // Constants
 const prompt = promptSync({ sigint: true });
@@ -17,7 +17,9 @@ while (true) {
     
     input = Number(input.trim());
 
-    // switch case for the main app
+
+
+    // switch case for the menu choice
     switch (input) {
         case 1:
             // 1. Afficher le tableau de bord
@@ -54,6 +56,10 @@ while (true) {
         case 9:
             // 9. Trier les apprenants par ordre alphabétique
             trierParOrdreAphabetique();
+            break;
+        case 10:
+            // 9. Trier les apprenants par ordre alphabétique
+            filtrerParVille();
             break;
         default:
             // 0. Quitter

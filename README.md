@@ -37,7 +37,7 @@
 - `npm run dev`
 
 ## Tests
-- 5 scénarios minimum, dont 2 cas invalides
+- 5 scénarios minimum
 
 ## Conventions
 - Total proposé nul → progression = 0%
