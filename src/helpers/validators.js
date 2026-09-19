@@ -6,7 +6,7 @@ export function validateChoice(str) {
 
 export function normaliserNom(nomComplet) {
     if (typeof nomComplet !== "string") return null;
-    nomComplet = nomComplet.trim();
+    nomComplet = nomComplet.trim().replace(/[^a-zA-Z\s]/g , "");
     if (nomComplet.length === 0 || nomComplet.length > 50) return null;
     return nomComplet.split(" ")
                      .filter(word => word !== "")
@@ -16,7 +16,7 @@ export function normaliserNom(nomComplet) {
 
 export function validateVille(ville) {
     if (typeof ville !== "string") return null;
-    ville = ville.trim();
+    ville = ville.trim().replace(/[^a-zA-Z\s]/g , "");
     if (ville.length === 0 || ville.length > 195) return null;
     return ville.split(" ")
                 .filter(word => word !== "")
