@@ -5,7 +5,6 @@ import { afficherLaListeDesApprenants, afficherLeTableau, ajouterApprenant, enre
 
 // Constants
 const prompt = promptSync({ sigint: true });
-console.log(messages.menuMessage);
 
 while (true) {
     console.log(messages.menuMessage);
