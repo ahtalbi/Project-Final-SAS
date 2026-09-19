@@ -11,11 +11,8 @@
     "type": "git",
     "url": "git+https://github.com/ahtalbi/Project-Final-SAS.git"
   },
-  
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "author": "ahtalbi",
   "bugs": {
     "url": "https://github.com/ahtalbi/Project-Final-SAS/issues"
   },
@@ -23,5 +20,5 @@
   "dependencies": {
     "prompt-sync": "^4.2.0"
   },
-  "type":"module"
+  "type": "module"
 }
